@@ -10,6 +10,8 @@ namespace DefaultNamespace
         private DamageSender.DamageSender _DamageSender;
         private LineRenderer _lineRenderer;
         private bool visible;
+
+        public ParticleSystem _muzzleFlash;
         
         public Transform _firePoint
         {
@@ -49,6 +51,8 @@ namespace DefaultNamespace
         public void Show(Vector3 from, Vector3 dir)
         {
 
+            _muzzleFlash.Play();
+            
             #region CollideDetect
 
             RaycastHit _raycast;

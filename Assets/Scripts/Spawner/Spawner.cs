@@ -53,7 +53,6 @@ namespace DefaultNamespace
             newPrefab.SetPositionAndRotation(spawnPos,rotation);
             newPrefab.parent = holder;
             newPrefab.gameObject.SetActive(true);
-            Debug.Log("Spawned");
             return newPrefab;
         }
 
