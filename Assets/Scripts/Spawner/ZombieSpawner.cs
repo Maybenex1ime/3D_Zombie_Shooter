@@ -39,6 +39,8 @@ namespace DefaultNamespace
                 {
                     Transform _newZombie = Spawn(spawnPos.localPosition, spawnPos.rotation);
                     _newZombie.GetComponent<DamageReceiver>().Reborn();
+                    var _zombieStateManager = _newZombie.GetComponent<ZombieStateManager>();
+                    _zombieStateManager.ChangeState(_zombieStateManager.RunningState);
                 }
 
                 _tick = _spawnRate;

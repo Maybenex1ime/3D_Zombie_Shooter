@@ -8,7 +8,6 @@ namespace DefaultNamespace
         public static BulletSpawner instance ;
         [SerializeField] private float distance;
         private DamageSender.DamageSender _DamageSender;
-        private LineRenderer _lineRenderer;
         private bool visible;
 
         public ParticleSystem _muzzleFlash;
@@ -37,7 +36,6 @@ namespace DefaultNamespace
 
         private void Start()
         {
-            _lineRenderer = GetComponent<LineRenderer>();
             _DamageSender = GetComponent<DamageSender.DamageSender>();
             LoadComponents("BulletPrefab");
         }
@@ -50,7 +48,6 @@ namespace DefaultNamespace
 
         public void Show(Vector3 from, Vector3 dir)
         {
-
             _muzzleFlash.Play();
             
             #region CollideDetect
@@ -61,7 +58,7 @@ namespace DefaultNamespace
 
             if (_raycast.transform != null)
             {
-                var zombie = _raycast.transform.GetComponent<ZombieDie>();
+                var zombie = _raycast.transform.GetComponent<ZombieStateManager>();
                 if (zombie != null)
                 {
                     _DamageSender.DealDame(zombie.transform);
@@ -69,7 +66,6 @@ namespace DefaultNamespace
             }
 
             #endregion
-            _lineRenderer.SetPositions(new Vector3[]{from, to});
             visible = true;
             gameObject.SetActive(true);
         }

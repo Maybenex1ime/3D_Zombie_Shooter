@@ -4,15 +4,15 @@ namespace DefaultNamespace
 {
     public class DamageReceiver : MonoBehaviour
     {
-        [SerializeField] private int _maxHP;
-        [SerializeField] private int _currentHP;
+        public int _maxHP;
+        public int  _currentHP;
 
         public void Reborn()
         {
             _currentHP = _maxHP;
         }
 
-        public void Deal(int damage)
+        public virtual void Deal(int damage)
         {
             _currentHP -= damage;
             if (this._currentHP < 0) this._currentHP = 0;
