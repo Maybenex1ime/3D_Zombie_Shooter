@@ -43,7 +43,7 @@ namespace DefaultNamespace
                 #region NavMeshLink
 
                 bool flag = false;
-                for (int i = 0; i< _m_offMeshLinks.arraySize; ++i)
+                    for (int i = 0; i< _m_offMeshLinks.arraySize; ++i)
                 {
                     Vector3 startPosition = _m_offMeshLinks.GetArrayElementAtIndex(i).FindPropertyRelative("m_Start").vector3Value;
                     Vector3 endPosition = _m_offMeshLinks.GetArrayElementAtIndex(i).FindPropertyRelative("m_End").vector3Value;

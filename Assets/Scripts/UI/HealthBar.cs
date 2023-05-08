@@ -35,6 +35,8 @@ namespace UI
         {
             
             #region Update UI
+
+            float fillF = _frontHealthBar.fillAmount;
             float fillB = _backHealthBar.fillAmount;
             float hFraction = health / maxHealth;
             if (fillB > hFraction)
@@ -45,15 +47,25 @@ namespace UI
                 float percentComplete = _lerpTimer / _chipSpeed;
                 _backHealthBar.fillAmount = Mathf.Lerp(fillB, hFraction, percentComplete);
             }
+
+            if (fillF < hFraction)
+            {
+                _backHealthBar.color = Color.green;
+                _backHealthBar.fillAmount = hFraction;
+                _lerpTimer += Time.deltaTime;
+                float percentComplete = _lerpTimer / _chipSpeed;
+                _frontHealthBar.fillAmount = Mathf.Lerp(fillF, _backHealthBar.fillAmount, percentComplete);
+            }
             #endregion
 
-            #region TakeDamage
+            #region HealthChange
 
             float HPCur = _player.transform.GetComponent<DamageReceiver>()._currentHP;
-            if (health > HPCur) _lerpTimer = 0f;
+            if (health != HPCur) _lerpTimer = 0f;
             health = HPCur;
 
             #endregion
+            
         }
     }
 }

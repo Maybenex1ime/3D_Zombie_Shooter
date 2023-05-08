@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -51,6 +52,12 @@ namespace DefaultNamespace
             ZombieSpawner.instance.Despawn(this.transform);
         }
 
+        IEnumerator RunParticleSystem()
+        {
+            this._muzzleFlash.Play();
+            yield return new WaitForSeconds(2);
+        }
+        
         public void ChangeState(ZombieBaseState state)
         {
             currentState = state;

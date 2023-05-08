@@ -8,9 +8,9 @@ namespace DefaultNamespace
         [SerializeField] protected Transform holder;
         [SerializeField] private List<Transform> prefabs;
         [SerializeField] private List<Transform> poolObj;
-        private string _prefabName;
+        protected string _prefabName;
 
-        protected void LoadComponents(string prefabName)
+        protected void  LoadComponents(string prefabName)
         {
             this._prefabName = prefabName;
             LoadHolder();

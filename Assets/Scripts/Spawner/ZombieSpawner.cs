@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace DefaultNamespace
 {
@@ -50,6 +51,12 @@ namespace DefaultNamespace
                 _tick -= Time.deltaTime;
             }
             
+        }
+
+        public override void Despawn(Transform obj)
+        {
+            PowerUpSpawner.instance.Spawn(obj.transform.position + Vector3.up * 0.5f,obj.rotation);
+            base.Despawn(obj);
         }
     }
 }

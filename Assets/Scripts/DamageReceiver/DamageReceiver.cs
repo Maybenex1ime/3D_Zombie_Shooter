@@ -22,6 +22,12 @@ namespace DefaultNamespace
         {
             return _currentHP <= 0;
         }
+
+        public void Heal(int heal)
+        {
+            _currentHP += heal;
+            if (this._currentHP > this._maxHP) this._currentHP = _maxHP;
+        }
         
     }
 }
