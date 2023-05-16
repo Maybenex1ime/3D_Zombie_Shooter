@@ -12,22 +12,29 @@ namespace DefaultNamespace
         private PlayerCamera _camera;
         public NavMeshData _data;
         public Transform _orientation;
-        private List<OffMeshLink> _offMeshLinks;
+        #if UNITY_EDITOR
         private SerializedProperty _m_offMeshLinks;
-        private void Awake()
-        {
-            _offMeshLinks = new List<OffMeshLink>();
-        }
-
+        #endif
         private void Start()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _camera = GetComponentInChildren<PlayerCamera>();
+#if UNITY_EDITOR
             _m_offMeshLinks = new SerializedObject(_data).FindProperty("m_OffMeshLinks");
+#endif
         }
 
         private void Update()
         {
+            #region Deead
+
+            if (GetComponent<DamageReceiver>().isDead())
+            {
+                Application.Quit();
+            }
+
+            #endregion
+            
             #region Movement
 
             float x = Input.GetAxis("Horizontal");
@@ -39,7 +46,7 @@ namespace DefaultNamespace
             {
                 Vector3 moveDirection = _orientation.forward * y + _orientation.right * x;
                 Vector3 movePosition = transform.position + moveDirection;
-                
+#if UNITY_EDITOR          
                 #region NavMeshLink
 
                 bool flag = false;
@@ -57,7 +64,10 @@ namespace DefaultNamespace
                 }
                 
                 #endregion
+
                 if(flag == false) _navMeshAgent.SetDestination(movePosition);
+#endif
+                _navMeshAgent.SetDestination(movePosition);
             }
             else
             {
@@ -67,8 +77,11 @@ namespace DefaultNamespace
             
             #region Shooting
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.J))
             {
+                #if UNITY_EDITOR
+                Debug.Log("EDITOR");              
+                #endif
                 var from = _camera.transform.position;
                 var direction = _camera.transform.forward; 
                 BulletSpawner.instance.Show(from,direction);

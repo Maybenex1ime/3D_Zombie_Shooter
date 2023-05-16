@@ -32,6 +32,7 @@ namespace DefaultNamespace
             Transform prefab = this.getPrefabByName(_prefabName);
             if (randomNum < prefab.GetComponent<Interactable>()._interactEffect._DropChance)
             {
+                //prefab.GetComponent<Interactable>().RandomEffect();
                 return base.Spawn(spawnPos, rotation);
             }
 

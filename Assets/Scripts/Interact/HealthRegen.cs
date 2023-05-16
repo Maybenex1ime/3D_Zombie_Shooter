@@ -1,4 +1,5 @@
 ﻿using DefaultNamespace;
+using Player;
 using UnityEngine;
 
 namespace Interact
@@ -10,6 +11,11 @@ namespace Interact
         public override void Apply(GameObject target)
         {
             target.GetComponent<DamageReceiver>().Heal(HealAmount);
+        }
+
+        public override void UnApply()
+        {
+            
         }
     }
 }
