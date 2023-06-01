@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using ScriptableObjects;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using Utility;
 
 namespace DefaultNamespace
 {
@@ -10,18 +12,14 @@ namespace DefaultNamespace
     {
         private NavMeshAgent _navMeshAgent;
         private PlayerCamera _camera;
-        public NavMeshData _data;
         public Transform _orientation;
-        #if UNITY_EDITOR
-        private SerializedProperty _m_offMeshLinks;
-        #endif
+        private List<Utility.Utility.WrapperOffMeshLinkData> _links;
+        [SerializeField] private NavMeshDataObject _data;
         private void Start()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _camera = GetComponentInChildren<PlayerCamera>();
-#if UNITY_EDITOR
-            _m_offMeshLinks = new SerializedObject(_data).FindProperty("m_OffMeshLinks");
-#endif
+            _links = _data._datas;
         }
 
         private void Update()
@@ -46,28 +44,21 @@ namespace DefaultNamespace
             {
                 Vector3 moveDirection = _orientation.forward * y + _orientation.right * x;
                 Vector3 movePosition = transform.position + moveDirection;
-#if UNITY_EDITOR          
+      
                 #region NavMeshLink
 
                 bool flag = false;
-                    for (int i = 0; i< _m_offMeshLinks.arraySize; ++i)
+                    for (int i = 0; i< _links.Count; ++i)
                 {
-                    Vector3 startPosition = _m_offMeshLinks.GetArrayElementAtIndex(i).FindPropertyRelative("m_Start").vector3Value;
-                    Vector3 endPosition = _m_offMeshLinks.GetArrayElementAtIndex(i).FindPropertyRelative("m_End").vector3Value;
-                    float radius = _m_offMeshLinks.GetArrayElementAtIndex(i).FindPropertyRelative("m_Radius").floatValue;
-                    if (radius >= Vector3.Distance(startPosition, this.transform.position))
+                    if (_links[i].radius >= Vector3.Distance(_links[i].startPos, this.transform.position))
                     {
-                        _navMeshAgent.SetDestination(endPosition);
+                        _navMeshAgent.SetDestination(_links[i].endPos);
                         flag = true;
                         break;
                     }
                 }
-                
-                #endregion
-
+                    #endregion
                 if(flag == false) _navMeshAgent.SetDestination(movePosition);
-#endif
-                _navMeshAgent.SetDestination(movePosition);
             }
             else
             {
@@ -79,9 +70,6 @@ namespace DefaultNamespace
 
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.J))
             {
-                #if UNITY_EDITOR
-                Debug.Log("EDITOR");              
-                #endif
                 var from = _camera.transform.position;
                 var direction = _camera.transform.forward; 
                 BulletSpawner.instance.Show(from,direction);

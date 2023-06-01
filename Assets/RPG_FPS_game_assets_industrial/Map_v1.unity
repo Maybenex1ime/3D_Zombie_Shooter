@@ -42048,7 +42048,6 @@ GameObject:
   - component: {fileID: 890260993}
   - component: {fileID: 9101104624705833010}
   - component: {fileID: 9101104624705833012}
-  - component: {fileID: 9101104624705833011}
   m_Layer: 0
   m_Name: Player Variant
   m_TagString: Player
@@ -43444,8 +43443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ec9a406f6747ce9ed914e92ad42bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _data: {fileID: 23800000, guid: e03e988c8989495478719c52c0bc44ae, type: 2}
   _orientation: {fileID: 3166754341067882138}
+  _data: {fileID: 11400000, guid: 4ae6c584452948f4ea26dbde71feec28, type: 2}
 --- !u!54 &9101104624705833010
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -43462,22 +43461,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &9101104624705833011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 879608286767985696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf00e4e22c73bc942889fa9581e084b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosion_particle: {fileID: 2144995336343569729, guid: a87520ff31aa0b84a8e877071258d12f, type: 3}
-  explosion_range_radius: 5
-  explosion_force: 0
-  attack_value: 1
 --- !u!114 &9101104624705833012
 MonoBehaviour:
   m_ObjectHideFlags: 0
