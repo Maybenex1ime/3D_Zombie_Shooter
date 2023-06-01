@@ -9,10 +9,5 @@ namespace Interact
         {
             target.GetComponent<Explodable>().nowExplode();
         }
-
-        public override void UnApply()
-        {
-            
-        }
     }
 }
