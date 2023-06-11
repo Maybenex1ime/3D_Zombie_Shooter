@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ScriptableObjects;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
-using Utility;
+using UnityEngine.InputSystem;
 
 namespace DefaultNamespace
 {
@@ -15,6 +13,7 @@ namespace DefaultNamespace
         public Transform _orientation;
         private List<Utility.Utility.WrapperOffMeshLinkData> _links;
         [SerializeField] private NavMeshDataObject _data;
+        [SerializeField] private InputActionReference movement, shoot, mouse;
         private void Start()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
@@ -35,8 +34,9 @@ namespace DefaultNamespace
             
             #region Movement
 
-            float x = Input.GetAxis("Horizontal");
-            float y = Input.GetAxis("Vertical");
+            Vector2 xy = movement.action.ReadValue<Vector2>();
+            float x = xy.x;
+            float y = xy.y;
 
             transform.rotation = _orientation.transform.rotation;
 
@@ -66,16 +66,23 @@ namespace DefaultNamespace
             }
             #endregion
             
-            #region Shooting
+            // #region Shooting
+            //
+            // if (shoot.action.IsPressed())
+            // {
+            //     var from = _camera.transform.position;
+            //     var direction = _camera.transform.forward; 
+            //     BulletSpawner.instance.Show(from,direction);
+            // }
+            //
+            // #endregion
+        }
 
-            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.J))
-            {
-                var from = _camera.transform.position;
-                var direction = _camera.transform.forward; 
-                BulletSpawner.instance.Show(from,direction);
-            }
-
-            #endregion
+        public void Shoot()
+        {
+            var from = _camera.transform.position;
+            var direction = _camera.transform.forward; 
+            BulletSpawner.instance.Show(from,direction);
         }
     }
 }
