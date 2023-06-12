@@ -48,14 +48,12 @@ namespace DefaultNamespace
 
         public void Dead()
         {
-            this._muzzleFlash.Play();
             ZombieSpawner.instance.Despawn(this.transform);
         }
 
-        IEnumerator RunParticleSystem()
+        void RunParticleSystem()
         {
             this._muzzleFlash.Play();
-            yield return new WaitForSeconds(2);
         }
         
         public void ChangeState(ZombieBaseState state)

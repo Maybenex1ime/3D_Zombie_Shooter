@@ -10,6 +10,7 @@ namespace DefaultNamespace
         public static ZombieSpawner instance;
         [SerializeField] private List<Transform> _spawnPoses;
         [SerializeField] private float _spawnRate;
+        private int count;
         private float _tick;
         private void Awake()
         {
@@ -34,7 +35,7 @@ namespace DefaultNamespace
 
         private void Spawning()
         {
-            if (_tick <= 0)
+            if (_tick <= 0 )
             {
                 foreach (Transform spawnPos in _spawnPoses)
                 {

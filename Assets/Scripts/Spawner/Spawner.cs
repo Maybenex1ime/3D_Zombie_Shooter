@@ -7,7 +7,8 @@ namespace DefaultNamespace
     {
         [SerializeField] protected Transform holder;
         [SerializeField] private List<Transform> prefabs;
-        [SerializeField] private List<Transform> poolObj;
+        [SerializeField] protected List<Transform> poolObj;
+        [SerializeField] private int _maxNum;
         protected string _prefabName;
 
         protected void  LoadComponents(string prefabName)
@@ -63,7 +64,7 @@ namespace DefaultNamespace
                 this.poolObj.Remove(obj);
                 return obj;
             }
-
+            
             Transform newPrefab = Instantiate(prefab);
             newPrefab.name = prefab.name;
             return newPrefab;

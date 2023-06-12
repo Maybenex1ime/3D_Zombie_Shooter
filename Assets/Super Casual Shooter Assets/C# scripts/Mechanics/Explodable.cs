@@ -14,7 +14,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(DamageReceiver))]
 [RequireComponent(typeof(DamageSender))]
-public class git Explodable : MonoBehaviour
+public class Explodable : MonoBehaviour
 {
     [SerializeField]
     private ParticleSystem explosion_particle; // particle for explosion

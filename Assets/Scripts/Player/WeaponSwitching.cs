@@ -1,10 +1,11 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
     public class WeaponSwitching : MonoBehaviour
     {
+        [SerializeField] private InputActionReference _mouseScroll;
         public int selectedWeapon = 0;
 
         private void Start()
@@ -14,13 +15,14 @@ namespace Player
 
         private void Update()
         {
-            if (Input.GetAxis("Mouse ScrollWheel") > 0)
+            Vector2 scrolling = _mouseScroll.action.ReadValue<Vector2>();
+            if (scrolling.y > 0)
             {
                 if (selectedWeapon >= transform.childCount - 1) selectedWeapon = 0;
                 else selectedWeapon++;
                 SelectWeapon();
             }
-            if (Input.GetAxis("Mouse ScrollWheel") < 0)
+            if (scrolling.y < 0)
             {
                 if (selectedWeapon <= 0) selectedWeapon = transform.childCount - 1;
                 else selectedWeapon--;

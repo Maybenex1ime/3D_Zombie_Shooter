@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Player;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,10 +11,13 @@ namespace Interact
         public List<InteractEffect> _listEffect;
         public InteractEffect _interactEffect;
         public float rotationSpeed = 10f;
+        public float _duration;
+        public GameObject model;
 
         private void Awake()
         {
             RandomEffect();
+            _duration = _interactEffect._duration;
         }
 
         public void OnTriggerEnter(Collider other)
@@ -22,6 +26,7 @@ namespace Interact
             {
                 Destroy(gameObject);
                 _interactEffect.Apply(other.gameObject);
+                Player_Powerups.instance.AddEffect(this);
             }
         }
 
@@ -30,13 +35,14 @@ namespace Interact
             transform.Rotate(Vector3.up,10f * Time.deltaTime);
         }
 
-        private void RandomEffect()
+        public void RandomEffect()
         {
-            if(this._interactEffect != null) return;
             int random = Random.Range(0, _listEffect.Count );
             _interactEffect = _listEffect[random];
-            Instantiate(_interactEffect._model, this.transform.position,
-                _interactEffect._model.transform.rotation, this.transform).transform.localScale = new Vector3(1, 1, 1);
+            if(model != null) Destroy(model); 
+            model = Instantiate(_interactEffect._model, this.transform.position,
+                _interactEffect._model.transform.rotation, this.transform);
+            model.transform.localScale = new Vector3(1, 1, 1);
         }
     }
 }

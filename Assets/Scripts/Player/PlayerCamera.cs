@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace DefaultNamespace
 {
@@ -8,7 +9,7 @@ namespace DefaultNamespace
         public float sensX;
         public float sensY;
         public Transform orientation;
-        public Transform gun;
+        [SerializeField] private InputActionReference rotating;
 
         private float xRotation;
         private float yRotation;
@@ -22,9 +23,8 @@ namespace DefaultNamespace
         private void Update()
         {
             
-            float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-            float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
-
+            float mouseX = rotating.action.ReadValue<Vector2>().x * Time.deltaTime * sensX;
+            float mouseY = rotating.action.ReadValue<Vector2>().y * Time.deltaTime * sensY;
             yRotation += mouseX;
 
             xRotation -= mouseY;
