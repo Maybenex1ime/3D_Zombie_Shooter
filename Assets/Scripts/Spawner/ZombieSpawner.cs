@@ -56,7 +56,7 @@ namespace DefaultNamespace
 
         public override void Despawn(Transform obj)
         {
-            PowerUpSpawner.instance.Spawn(obj.transform.position + Vector3.up * 0.5f,obj.rotation);
+            //PowerUpSpawner.instance.Spawn(obj.transform.position + Vector3.up * 0.5f,obj.rotation);
             base.Despawn(obj);
         }
     }

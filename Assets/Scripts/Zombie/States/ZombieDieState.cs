@@ -9,6 +9,7 @@ namespace DefaultNamespace
         {
             _zombie._animator.SetTrigger("died");
             _zombie._navMeshAgent.SetDestination(_zombie.transform.position);
+            _zombie.Dead();
         }
 
         public override void UpdateState()

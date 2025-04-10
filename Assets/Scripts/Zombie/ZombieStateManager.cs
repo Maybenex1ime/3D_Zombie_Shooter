@@ -12,9 +12,8 @@ namespace DefaultNamespace
         public ZombieDieState DieState = new ZombieDieState();
         public ZombieAttackState AttackState = new ZombieAttackState();
 
-        public ZombieStateManager instance;
         public NavMeshAgent _navMeshAgent;
-        public CharController _player;
+        public PhysicsCharacterController _player;
         public Animator _animator;
         public ParticleSystem _muzzleFlash;
         public DamageReceiver _DamageReceiver;
@@ -24,7 +23,7 @@ namespace DefaultNamespace
         private void Awake()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
-            _player = FindObjectOfType<CharController>();
+            _player = FindObjectOfType<PhysicsCharacterController>();
             _animator = GetComponent<Animator>();
             _muzzleFlash = GetComponentInChildren<ParticleSystem>();
             _DamageReceiver = GetComponent<DamageReceiver>();
@@ -48,7 +47,8 @@ namespace DefaultNamespace
 
         public void Dead()
         {
-            ZombieSpawner.instance.Despawn(this.transform);
+            Debug.Log("Dead");
+            ZombieSpawner.instance.Despawn(transform);
         }
 
         void RunParticleSystem()

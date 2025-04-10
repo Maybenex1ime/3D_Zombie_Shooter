@@ -11,13 +11,13 @@ namespace UI
         public float _chipSpeed;
         public Image _frontHealthBar;
         public Image _backHealthBar;
-        private CharController _player;
+        private PhysicsCharacterController _player;
         private float health;
         private float maxHealth;
 
         private void Awake()
         {
-            _player = FindObjectOfType<CharController>();
+            _player = FindObjectOfType<PhysicsCharacterController>();
         }
 
         private void Start()
