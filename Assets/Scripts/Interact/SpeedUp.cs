@@ -9,7 +9,7 @@ namespace Interact
     {
         private GameObject _target;
         private int _speedUp = 7;
-        private float _speedNor = 3.5f;
+        private float _speedNormal = 3.5f;
         public override void Apply(GameObject target)
         {
             if(_target == null) _target = target;
@@ -18,7 +18,7 @@ namespace Interact
 
         public override void UnApply()
         {
-            _target.GetComponent<NavMeshAgent>().speed = _speedNor;
+            _target.GetComponent<NavMeshAgent>().speed = _speedNormal;
         }
     }
 }

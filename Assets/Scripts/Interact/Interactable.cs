@@ -6,18 +6,25 @@ using Random = UnityEngine.Random;
 
 namespace Interact
 {
+    [RequireComponent(typeof(MeshFilter))]
     public class Interactable : MonoBehaviour
     {
         public List<InteractEffect> _listEffect;
-        public InteractEffect _interactEffect;
-        public float rotationSpeed = 10f;
-        public float _duration;
-        public GameObject model;
+        private InteractEffect _interactEffect;
+        [SerializeField] private float rotationSpeed = 10f;
+        private Mesh model;
+        private MeshFilter _filter;
+        private float _duration;
+        
+        public int DropChance
+        {
+            get { return _interactEffect._DropChance; }
+        }
 
         private void Awake()
         {
+            _filter = GetComponent<MeshFilter>();
             RandomEffect();
-            _duration = _interactEffect._duration;
         }
 
         public void OnTriggerEnter(Collider other)
@@ -39,10 +46,12 @@ namespace Interact
         {
             int random = Random.Range(0, _listEffect.Count );
             _interactEffect = _listEffect[random];
-            if(model != null) Destroy(model); 
-            model = Instantiate(_interactEffect._model, this.transform.position,
-                _interactEffect._model.transform.rotation, this.transform);
-            model.transform.localScale = new Vector3(1, 1, 1);
+            _filter.mesh = _interactEffect._model;
+        }
+
+        public void UnApply()
+        {
+            _interactEffect.UnApply();
         }
     }
 }

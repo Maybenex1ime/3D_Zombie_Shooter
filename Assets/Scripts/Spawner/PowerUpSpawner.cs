@@ -9,6 +9,7 @@ namespace DefaultNamespace
     public class PowerUpSpawner : Spawner
     {
         public static PowerUpSpawner instance;
+        public int Number
         
         private void Awake()
         {
@@ -30,9 +31,8 @@ namespace DefaultNamespace
         {
             int randomNum = Random.Range(1, 101);
             Transform prefab = this.getPrefabByName(_prefabName);
-            if (randomNum < prefab.GetComponent<Interactable>()._interactEffect._DropChance)
+            if (randomNum < prefab.GetComponent<Interactable>().DropChance)
             {
-                //prefab.GetComponent<Interactable>().RandomEffect();
                 return base.Spawn(spawnPos, rotation);
             }
 

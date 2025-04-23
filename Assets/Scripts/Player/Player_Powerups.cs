@@ -23,8 +23,8 @@ namespace Player
         {
             foreach (Interactable effect in _effects.ToArray())
             {
-                if(effect._duration <=0f ) RemoveEffect(effect);
-                else effect._duration -= Time.deltaTime;
+                if(effect.Duration <=0f ) RemoveEffect(effect);
+                else effect.Duration -= Time.deltaTime;
             }
         }
 
@@ -35,7 +35,7 @@ namespace Player
 
         private void RemoveEffect(Interactable effect)
         {
-            effect._interactEffect.UnApply();
+            effect.UnApply();
             _effects.Remove(effect);
         }
         
