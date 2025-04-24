@@ -24,7 +24,7 @@ namespace DefaultNamespace
         public void Attack()
         {
             _zombie._animator.SetTrigger("attack");
-            
+            _zombie._DamageSender.DealDame(_zombie._player.GetComponent<DamageReceiver>());
         }
         
     }
