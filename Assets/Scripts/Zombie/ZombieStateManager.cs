@@ -15,7 +15,6 @@ namespace DefaultNamespace
         public NavMeshAgent _navMeshAgent;
         public PhysicsCharacterController _player;
         public Animator _animator;
-        public ParticleSystem _muzzleFlash;
         public DamageReceiver _DamageReceiver;
         public DamageSender.DamageSender _DamageSender;
         public float _distanceToAttack;
@@ -25,7 +24,6 @@ namespace DefaultNamespace
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _player = FindObjectOfType<PhysicsCharacterController>();
             _animator = GetComponent<Animator>();
-            _muzzleFlash = GetComponentInChildren<ParticleSystem>();
             _DamageReceiver = GetComponent<DamageReceiver>();
             _DamageSender = GetComponent<DamageSender.DamageSender>();
             RunningState.SetStateManager(this);
@@ -50,14 +48,10 @@ namespace DefaultNamespace
             Debug.Log("Dead");
             ZombieSpawner.instance.Despawn(transform);
         }
-
-        void RunParticleSystem()
-        {
-            this._muzzleFlash.Play();
-        }
         
         public void ChangeState(ZombieBaseState state)
         {
+            Debug.Log(state.GetType().Name);
             currentState = state;
             state.EnterState();
         }

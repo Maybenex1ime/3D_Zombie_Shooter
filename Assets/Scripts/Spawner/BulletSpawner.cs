@@ -48,6 +48,7 @@ namespace DefaultNamespace
 
         public void Show(Vector3 from, Vector3 dir)
         {
+            _muzzleFlash.gameObject.SetActive(true);
             _muzzleFlash.Play();
             
             #region CollideDetect
@@ -68,11 +69,6 @@ namespace DefaultNamespace
             #endregion
             visible = true;
             gameObject.SetActive(true);
-        }
-
-        public void Shoot(Vector3 from, Vector3 dir)
-        {
-            GameObject bullet = BulletSpawner.instance.Spawn(from, firePoint.rotation).gameObject;
         }
     }
 }

@@ -10,6 +10,7 @@ namespace DefaultNamespace
         public static ZombieSpawner instance;
         [SerializeField] private List<Transform> _spawnPoses;
         [SerializeField] private float _spawnRate;
+        [SerializeField] private float _powerUpsRate;
         private int count;
         private float _tick;
         private void Awake()
@@ -56,7 +57,7 @@ namespace DefaultNamespace
 
         public override void Despawn(Transform obj)
         {
-            //PowerUpSpawner.instance.Spawn(obj.transform.position + Vector3.up * 0.5f,obj.rotation);
+            if(Random.Range(0, 100) < _powerUpsRate) PowerUpSpawner.instance.Spawn(obj.transform.position + Vector3.up * 0.5f,obj.rotation);
             base.Despawn(obj);
         }
     }

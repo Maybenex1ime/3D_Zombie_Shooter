@@ -15,7 +15,7 @@ namespace DefaultNamespace
             PowerUpSpawner spawner = (PowerUpSpawner)target;
             if (GUILayout.Button("Spawn PowerUps"))
             {
-                spawner.Spawn(Vector3.zero, Quaternion.identity);
+                spawner.Spawn(new Vector3(0,0.4f,0), Quaternion.identity);
             }
             base.OnInspectorGUI();
         }
@@ -44,7 +44,9 @@ namespace DefaultNamespace
         public override Transform Spawn(Vector3 spawnPos, Quaternion rotation)
         {
             Debug.Log("Spawn Powerups");
-            return base.Spawn(spawnPos, rotation);
+            Transform target = base.Spawn(spawnPos, rotation);
+            target.localScale = Vector3.one * 50;
+            return target;
         }
     }
 }

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0f43c866ecc40d4b5a91426c719310a, type: 3}
+  m_Name: HealthRegen
+  m_EditorClassIdentifier: 
+  _EffectName: 
+  _DropChance: 15
+  _model: {fileID: 4300000, guid: 4f1fb6f3be731ba458d3f8702ff68c24, type: 2}
+  _duration: 0
+  HealAmount: 1

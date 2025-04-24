@@ -37,6 +37,7 @@ namespace Interact
         {
             if (other.CompareTag("Player"))
             {
+                Debug.Log("Triggered effect");
                 Destroy(gameObject);
                 _interactEffect.Apply(other.gameObject);
                 Player_Powerups.instance.AddEffect(this);
