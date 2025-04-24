@@ -15,6 +15,12 @@ namespace Interact
         private Mesh model;
         private MeshFilter _filter;
         private float _duration;
+
+        public float Duration
+        {
+            get => _duration;
+            set { _duration = value; }
+        }
         
         public int DropChance
         {

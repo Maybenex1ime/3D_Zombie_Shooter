@@ -1,15 +1,29 @@
 ﻿using System;
 using Interact;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace DefaultNamespace
 {
+    [CustomEditor(typeof(PowerUpSpawner))]
+    public class PowerUpSpawnerEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            PowerUpSpawner spawner = (PowerUpSpawner)target;
+            if (GUILayout.Button("Spawn PowerUps"))
+            {
+                spawner.Spawn(Vector3.zero, Quaternion.identity);
+            }
+            base.OnInspectorGUI();
+        }
+    }
+    
     public class PowerUpSpawner : Spawner
     {
         public static PowerUpSpawner instance;
-        public int Number
         
         private void Awake()
         {
@@ -29,14 +43,8 @@ namespace DefaultNamespace
 
         public override Transform Spawn(Vector3 spawnPos, Quaternion rotation)
         {
-            int randomNum = Random.Range(1, 101);
-            Transform prefab = this.getPrefabByName(_prefabName);
-            if (randomNum < prefab.GetComponent<Interactable>().DropChance)
-            {
-                return base.Spawn(spawnPos, rotation);
-            }
-
-            return null;
+            Debug.Log("Spawn Powerups");
+            return base.Spawn(spawnPos, rotation);
         }
     }
 }

@@ -14,14 +14,8 @@ namespace DefaultNamespace
         protected void  LoadComponents(string prefabName)
         {
             this._prefabName = prefabName;
-            LoadHolder();
+            //LoadHolder();
             LoadPrefabs();
-        }
-
-        protected virtual void LoadHolder()
-        {
-            if (this.holder != null) return;
-            this.holder = transform.Find("Holder");
         }
 
         protected virtual void LoadPrefabs()
